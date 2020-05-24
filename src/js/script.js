@@ -62,7 +62,7 @@
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
       thisProduct.processOrder();
-      console.log('new Product:', thisProduct)
+      console.log('new Product:', thisProduct);
     }
     renderInMenu(){
       const thisProduct = this;
@@ -87,6 +87,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion(){
@@ -96,24 +97,25 @@
       /* START: click event listener to trigger */
       clickableTrigger.addEventListener('click', function(){
       /* prevent default action for event */
-      event.preventDefault(); 
-      /* toggle active class on element of thisProduct */
-      thisProduct.element.classList.toggle('active'); 
-      /* find all active products */
-      const activeProducts = document.querySelectorAll('.active'); 
-      /* START LOOP: for each active product */
-      for (let activeProduct of activeProducts) { 
+        event.preventDefault(); 
+        /* toggle active class on element of thisProduct */
+        thisProduct.element.classList.toggle('active'); 
+        /* find all active products */
+        const activeProducts = document.querySelectorAll('.active'); 
+        /* START LOOP: for each active product */
+        for (let activeProduct of activeProducts) { 
         /* START: if the active product isn't the element of thisProduct */
-        if (activeProduct != thisProduct.element) {
+          if (activeProduct != thisProduct.element) {
           /* remove class active for the active product */
-          activeProduct.classList.remove('active');
-        /* END: if the active product isn't the element of thisProduct */
+            activeProduct.classList.remove('active');
+            /* END: if the active product isn't the element of thisProduct */
           }
-      /* END LOOP: for each active product */
+          /* END LOOP: for each active product */
         }   
-    /* END: click event listener to trigger */
+        /* END: click event listener to trigger */
       });
     }
+    
     initOrderForm(){
       const thisProduct = this;
       console.log('initOrderForm:',thisProduct);
@@ -132,9 +134,8 @@
         event.preventDefault();
         thisProduct.processOrder();
       });
-    };
+    }
 
-  
     processOrder(){
       const thisProduct = this;
       console.log('processOrder:',thisProduct);
@@ -143,31 +144,43 @@
       console.log('formData', formData);
       /* set variable price to equal thisProduct.data.price */
       let price = thisProduct.data.price;
-       /* START LOOP: for each paramId in thisProduct.data.params */
+      /* START LOOP: for each paramId in thisProduct.data.params */
       for(let paramId in thisProduct.data.params){
         /* save the element in thisProduct.data.params with key paramId as const param */
         const param = thisProduct.data.params[paramId];
         /* START LOOP: for each optionId in param.options */
-          for(let optionId in param.options){
-             /* save the element in param.options with key optionId as const option */
-            const option = param.options[optionId];
-            /* START IF: if option is selected and option is not default */
-            const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
-            if (optionSelected && !option.default) {
-              price += option.price;
+        for(let optionId in param.options){
+          /* save the element in param.options with key optionId as const option */
+          const option = param.options[optionId];
+          /* START IF: if option is selected and option is not default */
+          const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
+          if (optionSelected && !option.default) {
+            price += option.price;
+          }
+          else if (!optionSelected && option.default) {
+            price -= option.price;
+          }
+          //stworzenie stałej, w której zapiszesz wyszukane elementy
+          const images = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
+          //START; blok if/else, którego warunek sprawdza tylko, czy opcja została zaznaczona,
+          if (optionSelected) {
+            //zarówno wewnątrz bloku if jak i else, musi znaleźć się pętla iterująca po znalezionych elementach
+            for (let image of images){
+              //dla każdego z tych elementów ma być dodana (w bloku if) lub usunięta (w bloku else) odpowiednia klasa
+              image.classList.add(classNames.menuProduct.imageVisible);
             }
-            else if (!optionSelected && option.default) {
-              price -= option.price;
+          } else {
+            for(let image of images){
+              image.classList.remove(classNames.menuProduct.imageVisible);
             }
-          }  
+          }
+        }  
       }
       //set variable price to equal thisProduct.priceElem
       thisProduct.priceElem.innerHTML = price;
       console.log(price);
-    };
+    }
   }
-
-  
 
   const app = {
     initData: function(){
