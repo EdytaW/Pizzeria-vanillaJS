@@ -179,7 +179,7 @@
         }  
       }
       //set variable price to equal thisProduct.priceElem
-      // price *= thisProduct.amountWidget.value;
+      price *= thisProduct.amountWidget.value;
       thisProduct.priceElem.innerHTML = price;
       // console.log(price);
     }
@@ -218,8 +218,8 @@
       /*TODO: Add validation */
 
       thisWidget.value = newValue;
-      // thisWidget.announce();
-      // thisWidget.input.value = thisWidget.value;
+      thisWidget.announce();
+      thisWidget.input.value = thisWidget.value;
     }
 
     initActions(){
@@ -239,12 +239,12 @@
       });
     }
 
-    // announce(){
-    //   const thisWidget = this;
+    announce(){
+      const thisWidget = this;
 
-    //   const event = new Event('updated');
-    //   thisWidget.element.dispatchEvent(event);
-    // }
+      const event = new Event('updated');
+      thisWidget.element.dispatchEvent(event);
+    }
   }
 
   const app = {
