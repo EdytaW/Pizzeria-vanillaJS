@@ -179,6 +179,7 @@
         }  
       }
       //set variable price to equal thisProduct.priceElem
+      // price *= thisProduct.amountWidget.value;
       thisProduct.priceElem.innerHTML = price;
       // console.log(price);
     }
@@ -186,6 +187,9 @@
     initAmountWidget(){
       const thisProduct = this;
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+      thisProduct.amountWidgetElem.addEventListener('updated', function(){
+        thisProduct.processOrder();
+      }); 
     }
   }
 
@@ -193,7 +197,7 @@
     constructor(element){
       const thisWidget = this;
       thisWidget.getElements(element);
-      thisWidget.setValue(element);
+      thisWidget.setValue(thisWidget.input.value);
       console.log('AmountWidget:', thisWidget);
       console.log('constructor argments:', element);
     }
@@ -214,9 +218,33 @@
       /*TODO: Add validation */
 
       thisWidget.value = newValue;
-      thisWidget.input.value = thisWidget.value;
-      thisWidget.setValue(thisWidget.input.value);
+      // thisWidget.announce();
+      // thisWidget.input.value = thisWidget.value;
     }
+
+    initActions(){
+      const thisWidget = this;
+      //dla thisWidget.input dodać listener eventu change 
+      thisWidget.input.addEventListener('change', function () {
+        //dla którego handler użyje metody setValue z takim samym argumentem, jak w konstruktorze (czyli z wartością inputa)
+        thisWidget.setValue(thisWidget.input.value);
+      });
+      thisWidget.linkDecrease.addEventListener('click', function (event) {
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.value - 1);
+      });
+      thisWidget.linkIncrease.addEventListener('click', function (event) {
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.value + 1);
+      });
+    }
+
+    // announce(){
+    //   const thisWidget = this;
+
+    //   const event = new Event('updated');
+    //   thisWidget.element.dispatchEvent(event);
+    // }
   }
 
   const app = {
