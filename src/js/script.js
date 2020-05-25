@@ -61,8 +61,9 @@
       thisProduct.getElements();
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
-      thisProduct.processOrder();
       thisProduct.initAmountWidget();
+      thisProduct.processOrder();
+      
       console.log('new Product:', thisProduct);
     }
     renderInMenu(){
@@ -181,7 +182,7 @@
       //set variable price to equal thisProduct.priceElem
       price *= thisProduct.amountWidget.value;
       thisProduct.priceElem.innerHTML = price;
-      // console.log(price);
+      console.log(price);
     }
 
     initAmountWidget(){
@@ -197,7 +198,9 @@
     constructor(element){
       const thisWidget = this;
       thisWidget.getElements(element);
-      thisWidget.setValue(thisWidget.input.value);
+      // thisWidget.value = settings.amountWidget.defaultValue;
+      thisWidget.setValue(settings.amountWidget.defaultValue);
+      thisWidget.initActions();
       console.log('AmountWidget:', thisWidget);
       console.log('constructor argments:', element);
     }
@@ -213,10 +216,14 @@
     setValue(value){
       const thisWidget = this;
 
-      const newValue = parseInt(value);
+      let newValue = parseInt(value);
 
       /*TODO: Add validation */
-
+      if(newValue>=9) {
+        newValue = 9;
+      }else if(newValue <= 1) {
+        newValue = 1;
+      }
       thisWidget.value = newValue;
       thisWidget.announce();
       thisWidget.input.value = thisWidget.value;
