@@ -170,6 +170,7 @@
       thisProduct.cartButton.addEventListener('click', function(event){
         event.preventDefault();
         thisProduct.processOrder();
+        thisProduct.addToCart();
       });
     }
 
@@ -179,6 +180,7 @@
       /* read all data from the form (using utils.serializeFormToObject) and save it to const formData */
       const formData = utils.serializeFormToObject(thisProduct.form);
       // console.log('formData', formData);
+      thisProduct.params = {};
       /* set variable price to equal thisProduct.data.price */
       let price = thisProduct.data.price;
       /* START LOOP: for each paramId in thisProduct.data.params */
@@ -201,6 +203,13 @@
           const images = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
           //START; blok if/else, którego warunek sprawdza tylko, czy opcja została zaznaczona,
           if (optionSelected) {
+            if(!thisProduct.params[paramId]){
+              thisProduct.params[paramId] = {
+                label: param.label,
+                options: {},
+              };
+            }
+            thisProduct.params[paramId].options[optionId] = option.label;
             //zarówno wewnątrz bloku if jak i else, musi znaleźć się pętla iterująca po znalezionych elementach
             for (let image of images){
               //dla każdego z tych elementów ma być dodana (w bloku if) lub usunięta (w bloku else) odpowiednia klasa
@@ -214,9 +223,13 @@
         }  
       }
       //set variable price to equal thisProduct.priceElem
-      price *= thisProduct.amountWidget.value;
-      thisProduct.priceElem.innerHTML = price;
-      // console.log(price);
+      /* multiply price by amount */
+      thisProduct.priceSingle = price;
+      thisProduct.price = thisProduct.priceSingle * thisProduct.amountWidget.value;
+
+      /* set the contents of thisProduct.priceElem to be the value of variable price */
+      thisProduct.priceElem.innerHTML = thisProduct.price;
+      console.log(thisProduct.params);
     }
 
     initAmountWidget(){
@@ -225,6 +238,13 @@
       thisProduct.amountWidgetElem.addEventListener('updated', function(){
         thisProduct.processOrder();
       }); 
+    }
+
+    addToCart(){
+      const thisProduct = this; 
+      thisProduct.name = thisProduct.data.name;
+      thisProduct.amountWidget.value = thisProduct.amount;
+      app.cart.add(thisProduct);
     }
   }
 
@@ -309,6 +329,8 @@
       thisCart.dom.wrapper = element;
       
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
+      
     }
 
     initActions(){
@@ -318,6 +340,25 @@
         //Handler tego listenera ma toggle'ować klasę zapisaną w classNames.cart.wrapperActive na elemencie thisCart.dom.wrapper
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
       });
+    }
+
+    add(menuProduct){
+      //const thisProduct = this; 
+      console.log('adding product', menuProduct);
+
+      const thisCart = this;
+      
+      /* generate HTML based on template*/
+      const generatedHTML = templates.cartProduct(menuProduct);
+     
+      /* create element using utils.createElementFromHTML */
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+      console.log('dom', generatedDOM);
+      /* add element to menu */
+      const cartProductList = thisCart.dom.productList;
+
+      cartProductList.appendChild(generatedDOM);
+      console.log('cartProductList', cartProductList);
     }
   }
 
