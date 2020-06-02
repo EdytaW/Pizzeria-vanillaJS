@@ -1,5 +1,6 @@
-import {settings, select, classNames, templates, utils} from './settings';
-import CartProduct from './components/CartProduct.js';
+import {settings, select, classNames, templates} from '../settings';
+import utils from '../utils.js';
+import CartProduct from '.CartProduct.js';
 class Cart{
   constructor(element){
     const thisCart = this; //stała thisCart w której zapisuje obiekt this 

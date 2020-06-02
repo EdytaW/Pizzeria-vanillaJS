@@ -1,4 +1,4 @@
-import {settings, select} from './settings';
+import {settings, select} from '..settings';
 
 
 class AmountWidget{
