@@ -61,7 +61,7 @@ export const classNames = {
   },
   // CODE ADDED END
 };
-  
+    
 export const settings = {
   amountWidget: {
     defaultValue: 1,
