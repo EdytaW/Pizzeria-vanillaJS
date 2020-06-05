@@ -1,7 +1,7 @@
 import {settings, select, classNames} from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
-
+import Booking from './components/Booking.js';
 const app = {
   initPages: function(){
     const thisApp = this;
@@ -94,6 +94,12 @@ const app = {
     });
   },
 
+  initBooking: function(){
+    const thisApp = this;
+    const widgetContainer = document.querySelector(select.containerOf.booking); //znajduje kontener widgetu do rezerwacji stron, którego selektor jest zapisany w select.containerOf.booking
+    thisApp.booking = new Booking(widgetContainer); //nowa instancja klasy Booking 
+  },
+
   init: function(){
     const thisApp = this;
     // console.log('*** App starting ***');
@@ -110,4 +116,5 @@ app.initData();
 app.initMenu();
 app.init();
 app.initCart();
+app.initBooking();
 
