@@ -21,7 +21,7 @@ export class DataPicker extends BaseWidget {
       minDate: thisWidget.minDate,
       maxDate: thisWidget.maxDate,
       locale: {
-        firstDayOfWeek: 1, 
+        firstDayOfWeek: 1, // start week on Monday
       },
       disable: [
         function(date){
