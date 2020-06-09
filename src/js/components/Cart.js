@@ -4,6 +4,7 @@ import CartProduct from './CartProduct.js';
 class Cart{
   constructor(element){
     const thisCart = this; //stała thisCart w której zapisuje obiekt this 
+    console.log(thisCart);
 
     thisCart.products = []; //tablica do przechowywania produktów dodanych do koszyka
 
