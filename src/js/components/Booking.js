@@ -74,7 +74,7 @@ export class Booking{
   parseData(bookings, eventsCurrent, eventsRepeat){
     const thisBooking = this;
     
-    thisBooking.booked = {};
+    thisBooking.booked = {}; //obiekt w którym są zapisane inf o zajętych stolikach 
 
     for(let item of bookings){
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table); 
@@ -109,8 +109,6 @@ export class Booking{
 
     const startHour = utils.hourToNumber(hour);
 
-  
-
     for(let hourBlock = startHour; hourBlock < startHour + duration; hourBlock += 0.5){
       // console.log('loop', hourBlock);
 
@@ -138,7 +136,9 @@ export class Booking{
       allAvailable = true;
     }
 
+    
     for(let table of thisBooking.dom.tables){
+      
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
       if(!isNaN(tableId)){
         tableId = parseInt(tableId);
@@ -147,9 +147,9 @@ export class Booking{
       if(
         !allAvailable
         &&
-        thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId) > -1
+        thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
       ){
-        tableId.classList.add(classNames.booking.tableBooked);
+        table.classList.add(classNames.booking.tableBooked);
       }else {
         table.classList.remove(classNames.booking.tableBooked);
       }
@@ -167,7 +167,7 @@ export class Booking{
     thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(select.booking.hoursAmount);
     thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
-    thisBooking.dom.tables = thisBooking.dom.wrapper.querySelector(select.booking.tables);
+    thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
   } 
   
   initWidgets(){
