@@ -100,6 +100,50 @@ const app = {
     thisApp.booking = new Booking(widgetContainer); //nowa instancja klasy Booking 
   },
 
+  initCarousel() {
+    const carouselArray = [];
+
+    carouselArray[0] = {
+      title: 'Perfect Food', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', author: '- Julia Roberts',
+    };
+    carouselArray[1] = {
+      title: 'Amaizing service', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', author: '- Pamela Anderson',
+    };
+    carouselArray[2] = {
+      title: 'Best coffee', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', author: '- Brad Pitt',
+    };
+
+    let i = 0;
+    const dots = document.querySelectorAll('.carousel-dots i');
+    function changeSlide() {
+      const title = document.querySelector('.review-title');
+      const text = document.querySelector('.review-text');
+      const name = document.querySelector('.review-author');
+
+      for (let dot of dots) {
+        if (dot.id == 'dot-'+ (i + 1)) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+        title.innerHTML = carouselArray[i].title;
+        text.innerHTML = carouselArray[i].text;
+        name.innerHTML = carouselArray[i].author;
+      }
+
+      if (i < carouselArray.length - 1) {
+        i++;
+      } else {
+        i = 0;
+      }
+    }
+    changeSlide();
+
+    setInterval(() => {
+      changeSlide();
+    }, 3000);
+  },
+
   init: function(){
     const thisApp = this;
     // console.log('*** App starting ***');
@@ -109,6 +153,7 @@ const app = {
     // console.log('templates:', templates);
     thisApp.initPages();
     thisApp.initData();
+    thisApp.initCarousel();
     // thisApp.initMenu();
   },
 };
@@ -117,4 +162,5 @@ app.initMenu();
 app.init();
 app.initCart();
 app.initBooking();
+
 
