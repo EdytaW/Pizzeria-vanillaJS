@@ -156,6 +156,7 @@ export class Booking{
         table.classList.remove(classNames.booking.tableBooked);
       }
     }
+    // thisBooking.SliderColour();
   }
 
   selectTable() {
@@ -185,6 +186,42 @@ export class Booking{
       });
     }
   }
+
+  // SliderColour(){
+  //   const thisBooking = this;
+
+  //   thisBooking.date = thisBooking.datePicker.value;
+  //   console.log('today is:', thisBooking.date);
+  //   const bookedHours = thisBooking.booked[thisBooking.date];
+  //   console.log('hours booked today: ', bookedHours);
+  //   thisBooking.dom.rangeSlider = thisBooking.dom.wrapper.querySelector(
+  //     select.widgets.hourPicker.slider //zapytać o slider!!!!!
+  //   );
+  //   const sliderColours = [];
+
+  //   for (let bookedHour in bookedHours) {
+  //     const firstOfInterval = ((bookedHour - 12) * 100) / 12;
+  //     console.log(firstOfInterval);
+  //     const secondOfInterval = (((bookedHour - 12) + .5) * 100) / 12;
+  //     if (bookedHour < 24) {
+  //       if (bookedHours[bookedHour].length <= 1) {
+  //         sliderColours.push('/*' + bookedHour + '*/green ' + firstOfInterval + '%, green ' + secondOfInterval + '%');
+  //         console.log(sliderColours);
+  //       } else if (bookedHours[bookedHour].length === 2) {
+  //         sliderColours.push('/*' + bookedHour + '*/orange ' + firstOfInterval + '%, orange ' + secondOfInterval + '%');
+  //       } else if (bookedHours[bookedHour].length === 3) {
+  //         sliderColours.push('/*' + bookedHour + '*/red ' + firstOfInterval + '%, red ' + secondOfInterval + '%');
+  //       }
+  //     }
+  //   }
+  //   sliderColours.sort();
+  //   const liveColours = sliderColours.join();
+
+  //   const slider = thisBooking.dom.rangeSlider;
+  //   console.log(slider);
+  //   slider.style.background = 'linear-gradient(to right, ' + liveColours + ')';
+  // }
+  
 
   sendReservation(){
     const thisBooking = this;
