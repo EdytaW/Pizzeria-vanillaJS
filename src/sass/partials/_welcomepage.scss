@@ -32,22 +32,22 @@
 
 //Carousel//
 .carousel-wrapper {
-    margin: 20px 0 20px 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  margin: 20px 0 20px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .carousel-image {
-    object-fit: cover;
-    height: 190px;
-    width: 190px;
+  object-fit: cover;
+  height: 190px;
+  width: 190px;
 }
 
 .carousel-review-wrapper{
-    margin-left: 50px;
-    width: 100%;
+  margin-left: 50px;
+  width: 100%;
 }
 
 //GALERY//
@@ -59,59 +59,59 @@
 }
 
 .galery-image-wrapper {
-    flex: 0 0 31%;
-    margin: 5px;
-    object-fit: cover;
-    position: relative;
-    height: 170px;
+  flex: 0 0 31%;
+  margin: 5px;
+  object-fit: cover;
+  position: relative;
+  height: 170px;
 }
 
- .gallery-image {
-    height: 100%;
-    width: 100%;
+.gallery-image {
+  height: 100%;
+  width: 100%;
 }
 
 .icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, .4);
-    opacity: 0;
-    transition: .4s;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, .4);
+  opacity: 0;
+  transition: .4s;
+  width: 100%;
+  height: 100%;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
 
-    i {
-      margin: 4px;
-    }
+  i {
+    margin: 4px;
+  }
 }
 
 .icon:hover {
-    color: salmon;
-    opacity: 1;
+  color: salmon;
+  opacity: 1;
 }
 
 .hours-wrapper{
-    margin: 6px 5px;
-    position: relative;
-    min-height: 121px;
-    background-color: #ff6b6b;
-    border-radius: 4px;
-    text-align: center
+  margin: 6px 5px;
+  position: relative;
+  min-height: 121px;
+  background-color: #ff6b6b;
+  border-radius: 4px;
+  text-align: center;
 }
 
 .hours {
-    position: absolute;
-    width: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }    
 
 .nav-link, .hours {
@@ -121,24 +121,25 @@
 }
 
 .carousel-dots {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
-    i {
+  i {
     color: #333;
     margin: 8px;
     font-size: 15px;
   
-      &.active {
-        color: salmon;
-      }
+    &.active {
+      color: salmon;
     }
   }
+}
 
-  .footer {
-      margin-top: 15px;
-  }
-  a {
-     color: salmon;
-  }
+.footer {
+  margin-top: 15px;
+}
+
+a {
+  color: salmon;
+}
