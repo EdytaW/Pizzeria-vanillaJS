@@ -38,7 +38,7 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
-
+_MACOSX
 # TypeScript v1 declaration files
 typings/
 
